@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina | Tu opinión brilla</title>
+<style>
+  *{box-sizing:border-box; font-family:'Segoe UI', Arial, sans-serif;}
+  body{margin:0; background:linear-gradient(180deg,#fffaf0,#fdf2d9); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px;}
+  .card{width:100%; max-width:560px; background:white; border-radius:28px; padding:28px; box-shadow:0 15px 40px rgba(176,141,62,.18); overflow:hidden; position:relative;}
+  .card:before{content:""; position:absolute; top:0; left:0; right:0; height:6px; background:linear-gradient(90deg,#b08d3e,#f3d68b,#b08d3e);}
+  .logo{width:210px; display:block; margin:5px auto 0;}
+  .sub{text-align:center; color:#9a8a6a; font-size:14px; margin:8px 0 18px;}
+  .progreso{background:#f1e8d0; height:10px; border-radius:20px; overflow:hidden;}
+  .barra{height:100%; width:14%; background:linear-gradient(90deg,#b08d3e,#e8c56a); transition:0.4s; border-radius:20px;}
+  .paso-texto{text-align:center; font-size:12px; color:#b08d3e; font-weight:bold; margin:8px 0 20px; letter-spacing:1px;}
+  .pregunta{font-size:22px; font-weight:800; color:#3a2f1a; line-height:1.2; animation:entrar .4s ease;}
+  .desc{color:#888; font-size:14px; margin-top:6px;}
+  @keyframes entrar{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
+  input, select, textarea{width:100%; padding:14px; margin-top:14px; border:2px solid #eee; border-radius:14px; font-size:16px; outline:none;}
+  input:focus, select:focus, textarea:focus{border-color:#b08d3e;}
+  textarea{height:90px; resize:none;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .chip{padding:10px 14px; border:2px solid #eee; border-radius:20px; cursor:pointer; font-size:14px; background:white; transition:.2s;}
+  .chip.sel{background:#b08d3e; color:white; border-color:#b08d3e;}
+  .estrellas{display:flex; gap:6px; font-size:38px; margin-top:14px; justify-content:center;}
+  .estrellas span{cursor:pointer; filter:grayscale(1); transition:.2s;}
+  .estrellas span.sel{filter:grayscale(0); transform:scale(1.15);}
+  .botones{display:flex; gap:10px; margin-top:22px;}
+  button{flex:1; padding:14px; border:none; border-radius:14px; font-size:16px; font-weight:bold; cursor:pointer;}
+  .btn-sig{background:#b08d3e; color:white;}
+  .btn-atras{background:#f3f0e8; color:#666;}
+  .btn-admin{background:#222; color:white; width:100%; margin-top:14px; padding:12px; border-radius:12px;}
+  .oculto{display:none !important;}
+  .final{text-align:center; animation:entrar .5s ease;}
+  .final h2{font-size:28px; color:#b08d3e; margin:10px 0;}
+  .final p{color:#666; line-height:1.5;}
+  .contador{text-align:center; background:#fff8e1; border:1px dashed #e8c56a; padding:10px; border-radius:12px; font-size:13px; margin-top:16px; color:#7a6520;}
+  table{width:100%; border-collapse:collapse; font-size:12px; margin-top:12px;}
+  th,td{border:1px solid #eee; padding:7px; text-align:left;}
+  th{background:#b08d3e; color:white;}
+</style>
+</head>
+<body>
+
+<div class="card" id="vistaEncuesta">
+  <img src="logo.png" class="logo" alt="Lumina">
+  <p class="sub">Joyería & Accesorios ✨ Tu opinión hace brillar a Lumina</p>
+
+  <div class="progreso"><div class="barra" id="barra"></div></div>
+  <div class="paso-texto" id="pasoTexto">PASO 1 DE 7 • ¡EMPECEMOS!</div>
+
+  <!-- PASO 1 -->
+  <div class="paso" id="paso1">
+    <div class="pregunta">¡Hola! ¿Cómo te llamás? 💛</div>
+    <div class="desc">Queremos conocerte para atenderte mejor.</div>
+    <input type="text" id="nombre" placeholder="Escribí tu nombre...">
+    <label style="font-size:13px; color:#888; display:block; margin-top:14px;">¿Cuántos años tenés?</label>
+    <select id="edad"><option>Menor de 18</option><option>18 a 25</option><option selected>26 a 35</option><option>36 a 50</option><option>Más de 50</option></select>
+  </div>
+
+  <!-- PASO 2 -->
+  <div class="paso oculto" id="paso2">
+    <div class="pregunta" id="titulo2">¿Visitaste nuestro local?</div>
+    <div class="desc">Tocá la opción que más te represente.</div>
+    <div class="chips" id="chipsVisita">
+      <div class="chip">Entré y compré 🛍️</div>
+      <div class="chip">Entré y solo miré 👀</div>
+      <div class="chip">Solo lo vi de afuera</div>
+      <div class="chip">Solo lo vi por Instagram / WhatsApp 📱</div>
+    </div>
+  </div>
+
+  <!-- PASO 3 -->
+  <div class="paso oculto" id="paso3">
+    <div class="pregunta">¿Qué te enamora más de Lumina?</div>
+    <div class="desc">Podés elegir varios, ¡no te limites!</div>
+    <div class="chips" id="chipsGustos">
+      <div class="chip">💍 Anillos</div><div class="chip">✨ Collares</div><div class="chip">💎 Aros</div><div class="chip">📿 Pulseras</div><div class="chip">⌚ Relojes</div><div class="chip">🎀 Accesorios pelo</div><div class="chip">👜 Carteras / Lentes</div>
+    </div>
+  </div>
+
+  <!-- PASO 4 -->
+  <div class="paso oculto" id="paso4">
+    <div class="pregunta">¿Qué estilo es más vos?</div>
+    <div class="chips" id="chipsEstilo">
+      <div class="chip">Delicado / Minimalista 🤍</div><div class="chip">Elegante / Dorado 👑</div><div class="chip">Moderno / Juvenil 🔥</div><div class="chip">Artesanal / Rústico 🌿</div><div class="chip">Colorido / Llamativo 🌈</div>
+    </div>
+  </div>
+
+  <!-- PASO 5 -->
+  <div class="paso oculto" id="paso5">
+    <div class="pregunta">Del 1 al 5, ¿cómo fue tu experiencia?</div>
+    <div class="desc">Tocá las estrellitas, ¡queremos saber la verdad!</div>
+    <div class="estrellas" id="estrellas"><span data-v="1">⭐</span><span data-v="2">⭐</span><span data-v="3">⭐</span><span data-v="4">⭐</span><span data-v="5">⭐</span></div>
+    <textarea id="gusto" placeholder="¿Qué fue lo que más te gustó? Ej: la atención, los precios, la variedad..."></textarea>
+  </div>
+
+  <!-- PASO 6 -->
+  <div class="paso oculto" id="paso6">
+    <div class="pregunta">Si Lumina fuera tu negocio, ¿qué le agregarías?</div>
+    <div class="desc">¡Tu idea puede hacerse realidad!</div>
+    <textarea id="mejora" placeholder="Ej: Más variedad para hombres, ofertas, espejo grande, música, sillitas para esperar, sorteos..."></textarea>
+    <label style="font-size:13px; color:#888; display:block; margin-top:14px;">¿Nos recomendarías?</label>
+    <select id="recomienda"><option>Sí, seguro 💛</option><option>Probablemente sí</option><option>No estoy seguro/a</option><option>No</option></select>
+  </div>
+
+  <!-- FINAL -->
+  <div class="paso oculto final" id="pasoFinal">
+    <div style="font-size:60px;">🎉✨</div>
+    <h2 id="graciasNombre">¡Gracias!</h2>
+    <p>Tu respuesta ya quedó guardada en Lumina.<br>Gracias por ayudarnos a hacer un lugar más lindo para todos.</p>
+    <p style="font-size:13px; color:#aaa;" id="fechaGuardada"></p>
+    <button class="btn-sig" onclick="location.reload()">Hacer otra encuesta</button>
+  </div>
+
+  <div class="botones" id="botonesNav">
+    <button class="btn-atras" id="btnAtras" onclick="cambiarPaso(-1)">← Atrás</button>
+    <button class="btn-sig" id="btnSig" onclick="cambiarPaso(1)">Siguiente →</button>
+  </div>
+
+  <div class="contador" id="contador">Ya brillaron con nosotros: <b>0 personas</b> ✨</div>
+  <button class="btn-admin" onclick="mostrarAdmin()">Ver respuestas guardadas (Solo dueña)</button>
+</div>
+
+<div class="card oculto" id="vistaAdmin">
+  <h2 style="color:#b08d3e;">Panel Dueña - Lumina</h2>
+  <p style="color:#666; font-size:14px;">Acá están todas las personas que hicieron la encuesta.</p>
+  <div id="totalAdmin" style="font-weight:bold;"></div>
+  <button class="btn-sig" style="width:100%; margin-top:10px;" onclick="descargarExcel()">📥 Descargar en Excel</button>
+  <button class="btn-admin" onclick="location.reload()">Volver</button>
+  <div id="tabla"></div>
+</div>
+
+<!-- VENTANA CLAVE DUEÑA - PRIVADA -->
+<div id="modalClave" class="oculto" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:100; padding:16px;">
+  <div style="background:white; padding:28px; border-radius:20px; width:100%; max-width:350px; text-align:center;">
+    <div style="font-size:40px;">🔒</div>
+    <h3 style="margin:10px 0 5px; color:#b08d3e;">Zona privada</h3>
+    <p style="color:#888; font-size:13px;">Solo la dueña de Lumina puede ver las respuestas.</p>
+    <input type="password" id="inputClave" placeholder="Escribí tu clave..." style="text-align:center;" onkeydown="if(event.key==='Enter') verificarClave()">
+    <button class="btn-sig" style="width:100%; margin-top:12px;" onclick="verificarClave()">Entrar</button>
+    <button class="btn-atras" style="width:100%; margin-top:8px;" onclick="document.getElementById('modalClave').classList.add('oculto'); document.getElementById('inputClave').value=''">Cancelar</button>
+  </div>
+</div>
+
+<script>
+let paso = 1, totalPasos = 6;
+let visita="", gustos=[], estilo="", puntos=5;
+const CLAVE_DUENA = "yelique2";
+let respuestas = JSON.parse(localStorage.getItem('lumina_encuestas')||'[]');
+document.getElementById('contador').innerHTML = `Ya brillaron con nosotros: <b>${respuestas.length} personas</b> ✨`;
+
+function actualizar(){
+  document.querySelectorAll('.paso').forEach(p=>p.classList.add('oculto'));
+  document.getElementById('paso'+paso)?.classList.remove('oculto');
+  document.getElementById('barra').style.width = (paso/totalPasos*100)+'%';
+  document.getElementById('pasoTexto').innerText = `PASO ${paso} DE ${totalPasos} • ${paso===totalPasos?'¡YA CASI TERMINÁS!':'SEGUÍ ASÍ'}`;
+  document.getElementById('btnAtras').style.visibility = paso===1?'hidden':'visible';
+  document.getElementById('btnSig').innerText = paso===totalPasos?'¡Enviar mi encuesta 💛':'Siguiente →';
+  if(paso===2){
+    let n=document.getElementById('nombre').value || '¡Qué lindo conocerte!';
+    document.getElementById('titulo2').innerText = `¡Gracias, ${n}! ¿Visitaste nuestro local?`;
+  }
+}
+actualizar();
+
+function cambiarPaso(dir){
+  if(dir===1){
+    if(paso===1 && !document.getElementById('nombre').value.trim()){ alert('¡Contanos tu nombre para seguir! 💛'); return; }
+    if(paso===2 && !visita){ alert('Elegí una opción para seguir'); return; }
+    if(paso===6){
+      guardar(); return;
+    }
+  }
+  paso += dir;
+  if(paso<1) paso=1;
+  actualizar();
+}
+
+function setupChips(id, single, callback){
+  document.querySelectorAll('#'+id+' .chip').forEach(c=>{
+    c.onclick=()=>{
+      if(single){ document.querySelectorAll('#'+id+' .chip').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); callback(c.innerText); }
+      else{ c.classList.toggle('sel'); callback(); }
+    }
+  });
+}
+setupChips('chipsVisita', true, t=>visita=t);
+setupChips('chipsEstilo', true, t=>estilo=t);
+setupChips('chipsGustos', false, ()=>{
+  gustos=[...document.querySelectorAll('#chipsGustos .chip.sel')].map(c=>c.innerText);
+});
+
+document.querySelectorAll('#estrellas span').forEach(s=>{
+  s.onclick=()=>{
+    puntos=parseInt(s.dataset.v);
+    document.querySelectorAll('#estrellas span').forEach((x,i)=>x.classList.toggle('sel', i<puntos));
+  }
+});
+document.querySelectorAll('#estrellas span').forEach(s=>s.classList.add('sel'));
+
+function guardar(){
+  const nueva={
+    fecha:new Date().toLocaleString('es-AR'),
+    nombre:document.getElementById('nombre').value,
+    edad:document.getElementById('edad').value,
+    visita, gustos:gustos.join(', '), estilo:estilo||'No eligió',
+    puntuacion:puntos+' estrellas',
+    gusto:document.getElementById('gusto').value,
+    mejora:document.getElementById('mejora').value,
+    recomienda:document.getElementById('recomienda').value
+  };
+  respuestas.push(nueva);
+  localStorage.setItem('lumina_encuestas', JSON.stringify(respuestas));
+  document.querySelectorAll('.paso').forEach(p=>p.classList.add('oculto'));
+  document.getElementById('pasoFinal').classList.remove('oculto');
+  document.getElementById('botonesNav').classList.add('oculto');
+  document.getElementById('pasoTexto').innerText='¡LISTO! • GRACIAS POR BRILLAR CON NOSOTROS';
+  document.getElementById('barra').style.width='100%';
+  document.getElementById('graciasNombre').innerText=`¡Gracias, ${nueva.nombre}!`;
+  document.getElementById('fechaGuardada').innerText=`Registrada el ${nueva.fecha}`;
+  for(let i=0;i<40;i++){ let e=document.createElement('div'); e.innerText=['✨','💛','💎','⭐'][i%4]; e.style.position='fixed'; e.style.left=Math.random()*100+'vw'; e.style.top='-20px'; e.style.fontSize='22px'; e.style.zIndex=99; document.body.appendChild(e); let y=-20; let t=setInterval(()=>{ y+=4; e.style.top=y+'px'; if(y>window.innerHeight){ clearInterval(t); e.remove(); } },20); }
+}
+
+function mostrarAdmin(){
+  document.getElementById('modalClave').classList.remove('oculto');
+  setTimeout(()=>document.getElementById('inputClave').focus(), 100);
+}
+
+function verificarClave(){
+  let c = document.getElementById('inputClave').value;
+  if(c !== CLAVE_DUENA){ alert('Clave incorrecta. Solo la dueña puede entrar.'); return; }
+  document.getElementById('modalClave').classList.add('oculto');
+  document.getElementById('inputClave').value = '';
+  document.getElementById('vistaEncuesta').classList.add('oculto');
+  document.getElementById('vistaAdmin').classList.remove('oculto');
+  document.getElementById('totalAdmin').innerText=`Total: ${respuestas.length} encuestas`;
+  if(!respuestas.length){ document.getElementById('tabla').innerHTML='<p>Aún no hay encuestas.</p>'; return; }
+  let h='<table><tr><th>Fecha</th><th>Nombre</th><th>Edad</th><th>Visita</th><th>Gustos</th><th>Estilo</th><th>Puntos</th><th>¿Qué le gustó?</th><th>¿Qué mejoraría?</th><th>¿Recomienda?</th></tr>';
+  respuestas.forEach(r=> h+=`<tr><td>${r.fecha}</td><td>${r.nombre}</td><td>${r.edad}</td><td>${r.visita}</td><td>${r.gustos}</td><td>${r.estilo}</td><td>${r.puntuacion}</td><td>${r.gusto}</td><td>${r.mejora}</td><td>${r.recomienda}</td></tr>`);
+  document.getElementById('tabla').innerHTML=h+'</table>';
+}
+
+function descargarExcel(){
+  if(!respuestas.length){ alert('No hay datos'); return; }
+  let csv='Fecha;Nombre;Edad;Visita;Gustos;Estilo;Puntuacion;Que le gusto;Que mejoraria;Recomienda\n';
+  respuestas.forEach(r=> csv+=`"${r.fecha}";"${r.nombre}";"${r.edad}";"${r.visita}";"${r.gustos}";"${r.estilo}";"${r.puntuacion}";"${r.gusto}";"${r.mejora}";"${r.recomienda}"\n`);
+  let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'})); a.download='Encuestas_Lumina.csv'; a.click();
+}
+</script>
+</body>
+</html>
